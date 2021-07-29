@@ -11,7 +11,9 @@ function getSignature(
   saveText,
   buttonTextColor,
   borderColor,
-  action
+  action,
+  _height,
+  _width
 ) {
   const ref = useRef();
 

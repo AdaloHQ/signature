@@ -12,6 +12,8 @@ function Signature(props) {
     buttonTextColor,
     borderColor,
     action,
+    _height,
+    _width,
   } = props;
   return (
     <View style={(styles.wrapper, { border: `2px solid ${borderColor}` })}>
@@ -23,7 +25,9 @@ function Signature(props) {
         saveText,
         buttonTextColor,
         borderColor,
-        action
+        action,
+        _height,
+        _width
       )}
     </View>
   );
