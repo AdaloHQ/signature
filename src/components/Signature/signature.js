@@ -102,4 +102,4 @@ export default getSignature;
 //TODO:
 //  - Fix border
 //  - Fix canvas height (currently extends below shown area (same as current?))
-//  - Signatures won't display in image component on native (existing issue)
+//  - Signatures won't display in image component on native
