@@ -16,30 +16,25 @@ function getSignature(
   _width
 ) {
   const sigRef = useRef();
-
   const row = {
     display: "flex",
     flexDirection: "row",
     width: "100%",
   };
-
   const button = {
     width: "50%",
-    height: "20%",
-    margin: 0,
-    display: "block",
+    height: _height * 0.2,
+    margin: "auto",
     float: "left",
-    textAlign: "center"
-  }
-
-  const buttonText = {
-    backgroundColor: buttonColor,
-    borderTop: `2px solid ${borderColor}`,
+    textAlign: "center",
     color: buttonTextColor,
-    width: "100%",
-    display: "block",
-    margin: 0,
-    padding: 5
+  };
+  const buttonText = {
+    color: buttonTextColor, 
+    textAlign: "center",
+    borderWidth: 2,
+    backgroundColor: buttonColor,
+    borderColor: borderColor
   }
 
   const handleEmpty = () => {
@@ -106,4 +101,5 @@ export default getSignature;
 
 //TODO:
 //  - Fix border
-//  - Fix canvas height (currently extends below shown area (same as current signature component?))
+//  - Fix canvas height (currently extends below shown area (same as current?))
+//  - Signatures won't display in image component on native (existing issue)

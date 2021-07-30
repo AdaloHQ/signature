@@ -58,7 +58,7 @@ function getSignature(
   ref.penColor = penColor
   ref.backgroundColor = backgroundColor
   return (
-    <View>
+    <View style={{backgroundColor: backgroundColor}}>
       <SignaturePad
         ref={ref}
         options={{ penColor: penColor }}
@@ -79,3 +79,4 @@ export default getSignature;
 
 //TODO
 //  - Make sure entire canvas is captured/displayed when it's large
+//  - Signatures from web will have black background in native webview (existing issue)

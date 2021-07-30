@@ -16,7 +16,7 @@ function Signature(props) {
     _width,
   } = props;
   return (
-    <View style={(styles.wrapper, { backgroundColor: backgroundColor, border: `2px solid ${borderColor}` })}>
+    <View style={(styles.wrapper, { border: `2px solid ${borderColor}` })}>
       {getSignature(
         backgroundColor,
         penColor,
