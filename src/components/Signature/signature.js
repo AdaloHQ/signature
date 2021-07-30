@@ -1,5 +1,5 @@
-import React, { Component, useRef } from "react";
-import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
+import React, {useRef} from "react";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import SignatureScreen from "react-native-signature-canvas";
 import { WebView } from "react-native-webview";
 
@@ -16,26 +16,34 @@ function getSignature(
   _width
 ) {
   const sigRef = useRef();
+
   const row = {
     display: "flex",
     flexDirection: "row",
     width: "100%",
   };
-  // const button = {
-  //   width: "50%",
-  //   height: "20%",
-  //   margin: "auto",
-  //   display: "block",
-  //   float: "left",
-  //   padding: 5,
-  //   textAlign: "center",
-  //   backgroundColor: buttonColor,
-  //   borderTop: `1px solid ${borderColor}`,
-  //   color: buttonTextColor,
-  // };
+
+  const button = {
+    width: "50%",
+    height: "20%",
+    margin: 0,
+    display: "block",
+    float: "left",
+    textAlign: "center"
+  }
+
+  const buttonText = {
+    backgroundColor: buttonColor,
+    borderTop: `2px solid ${borderColor}`,
+    color: buttonTextColor,
+    width: "100%",
+    display: "block",
+    margin: 0,
+    padding: 5
+  }
 
   const handleEmpty = () => {
-    console.log("Empty");
+    console.log("Empty signature");
   };
 
   const handleSignature = (signature) => {
@@ -49,56 +57,53 @@ function getSignature(
   };
 
   const handleConfirm = () => {
-    console.log("end");
     sigRef.current.readSignature();
   };
-
 
   return (
     <View
       style={{
         width: _width,
-        height: _height,
-        border: `3px solid ${borderColor}`,
+        height: _height
       }}
     >
       <SignatureScreen
         ref={sigRef}
         onOK={handleSignature}
         onEmpty={handleEmpty}
-        descriptionText=""
-        clearText={clearText}
-        confirmText={saveText}
         webStyle={`
-			.m-signature-pad 
-			{
-				background-color: ${backgroundColor};
-				width: ${_width};
-  				height: ${_height};
-			}
-            .m-signature-pad--footer
-            {
-				display: none; margin: 0px;
-            }
-		`}
+			    .m-signature-pad 
+			    {
+				    background-color: ${backgroundColor};
+				    
+  				  height: ${_height};
+            border: 2px solid ${borderColor};
+			    }
+          .m-signature-pad--footer
+          {
+				    display: none;
+            margin: 0px;
+          }
+		    `}
         autoClear={true}
         imageType={"image/svg+xml"}
         penColor={penColor}
       />
+      
       <View style={row}>
-        <Button
-          color={buttonColor}
-          title={clearText}
-          onPress={handleClear}
-        />
-        <Button
-          color={buttonColor}
-          title={saveText}
-          onPress={handleConfirm}
-        />
+        <TouchableOpacity style={button} onPress={handleClear}>
+          <Text style={[buttonText, {borderRightWidth: 0}]}>{clearText}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={button} onPress={handleConfirm}>
+          <Text style={buttonText}>{saveText}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 }
 
 export default getSignature;
+
+//TODO:
+//  - Fix border
+//  - Fix canvas height (currently extends below shown area (same as current signature component?))

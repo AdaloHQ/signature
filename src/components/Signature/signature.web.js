@@ -1,5 +1,5 @@
-import React, { Component, useRef } from "react";
-import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
+import React, { useRef } from "react";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import SignaturePad from "react-signature-pad-wrapper";
 import { WebView } from "react-native-webview";
 
@@ -23,17 +23,23 @@ function getSignature(
     width: "100%"
   }
   
-  const button= {
+  const button = {
     width: "50%",
     height: "20%",
-    margin: "auto",
+    margin: 0,
     display: "block",
     float: "left",
-    padding: 5,
-    textAlign: "center",
-    backgroundColor: buttonColor, 
-    borderTop: `1px solid ${borderColor}`, 
-    color: buttonTextColor
+    textAlign: "center"
+  }
+
+  const buttonText = {
+    backgroundColor: buttonColor,
+    borderTop: `2px solid ${borderColor}`,
+    color: buttonTextColor,
+    width: "100%",
+    display: "block",
+    margin: 0,
+    padding: 5
   }
 
   const handleConfirm = () => {
@@ -55,46 +61,21 @@ function getSignature(
     <View>
       <SignaturePad
         ref={ref}
-        options={{ backgroundColor: backgroundColor, penColor: penColor }}
+        options={{ penColor: penColor }}
       />
       <View style={row}>
         <TouchableOpacity style={button} onPress={handleClear}>
-          <Text>{clearText}</Text>
+          <Text style={buttonText}>{clearText}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[button, {borderLeft: `1px solid ${borderColor}`}]} onPress={handleConfirm}>
-          <Text>{saveText}</Text>
+        <TouchableOpacity style={button} onPress={handleConfirm}>
+          <Text style={[buttonText, {borderLeft: `2px solid ${borderColor}`}]}>{saveText}</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-// const myStyles = StyleSheet.create({
-//   row = {
-//     display: "flex",
-//     flexDirection: "row",
-//     width: "100%"
-//   },
-//   clearButton: {
-//     width: "50%",
-//     height: "20%",
-//     margin: "auto",
-//     display: "block",
-//     float: "left",
-//     padding: 5,
-//     textAlign: "center"
-//   },
-//   saveButton: {
-//     width: "50%",
-//     height: "20%",
-//     margin: "auto",
-//     display: "block",
-//     float: "left",
-//     padding: 5,
-//     textAlign: "center"
-//   }
-// });
-
 export default getSignature;
-//, {backgroundColor: buttonColor, borderTop: `1px solid ${borderColor}`, color: buttonTextColor}]
-//, {backgroundColor: buttonColor, borderTop: `1px solid ${borderColor}`, borderLeft: `1px solid ${borderColor}`, color: buttonTextColor}]
+
+//TODO
+//  - Make sure entire canvas is captured/displayed when it's large

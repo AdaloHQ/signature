@@ -1,7 +1,7 @@
 {
   "displayName": "Signature",
   "defaultWidth": 162,
-  "defaultHeight": 107,
+  "defaultHeight": 111,
   "components": "./index.js",
   "icon": "./example-thumbnail.png",
   "props": [
@@ -39,13 +39,13 @@
       "name": "buttonTextColor",
       "displayName": "Button Text Color",
       "type": "color",
-      "default": "@contrast:@primary"
+      "default": "@background"
     },
     {
       "name": "borderColor",
       "displayName": "Border Color",
       "type": "color",
-      "default": "@contrast:@background"
+      "default": "@text"
     },
     {
       "name": "action",
