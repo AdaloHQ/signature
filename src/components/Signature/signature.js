@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import SignatureScreen from "react-native-signature-canvas";
 import { WebView } from "react-native-webview";
@@ -6,14 +6,15 @@ import { WebView } from "react-native-webview";
 function getSignature(
   backgroundColor,
   penColor,
-  buttonColor,
+  saveButtonColor,
+  clearButtonColor,
   clearText,
   saveText,
-  buttonTextColor,
   borderColor,
   action,
   _height,
-  _width
+  _width,
+  styles
 ) {
   const sigRef = useRef();
   const row = {
@@ -21,21 +22,36 @@ function getSignature(
     flexDirection: "row",
     width: "100%",
   };
-  const button = {
+  const saveButton = {
     width: "50%",
     height: _height * 0.2,
     margin: "auto",
     float: "left",
     textAlign: "center",
-    color: buttonTextColor,
+    color: styles.saveButton.color,
   };
-  const buttonText = {
-    color: buttonTextColor, 
+  const clearButton = {
+    width: "50%",
+    height: _height * 0.2,
+    margin: "auto",
+    float: "left",
+    textAlign: "center",
+    color: styles.clearButton.color,
+  };
+  const saveButtonText = {
+    color: styles.saveButton.color,
     textAlign: "center",
     borderWidth: 2,
-    backgroundColor: buttonColor,
-    borderColor: borderColor
-  }
+    backgroundColor: saveButtonColor,
+    borderColor: borderColor,
+  };
+  const clearButtonText = {
+    color: styles.clearButton.color,
+    textAlign: "center",
+    borderWidth: 2,
+    backgroundColor: clearButtonColor,
+    borderColor: borderColor,
+  };
 
   const handleEmpty = () => {
     console.log("Empty signature");
@@ -59,7 +75,7 @@ function getSignature(
     <View
       style={{
         width: _width,
-        height: _height
+        height: _height,
       }}
     >
       <SignatureScreen
@@ -84,13 +100,15 @@ function getSignature(
         imageType={"image/svg+xml"}
         penColor={penColor}
       />
-      
+
       <View style={row}>
-        <TouchableOpacity style={button} onPress={handleClear}>
-          <Text style={[buttonText, {borderRightWidth: 0}]}>{clearText}</Text>
+        <TouchableOpacity style={clearButton} onPress={handleClear}>
+          <Text style={[clearButtonText, { borderRightWidth: 0 }]}>
+            {clearText}
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={button} onPress={handleConfirm}>
-          <Text style={buttonText}>{saveText}</Text>
+        <TouchableOpacity style={saveButton} onPress={handleConfirm}>
+          <Text style={saveButtonText}>{saveText}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -98,8 +116,3 @@ function getSignature(
 }
 
 export default getSignature;
-
-//TODO:
-//  - Fix border
-//  - Fix canvas height (currently extends below shown area (same as current?))
-//  - Signatures won't display in image component on native

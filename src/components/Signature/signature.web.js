@@ -6,69 +6,97 @@ import { WebView } from "react-native-webview";
 function getSignature(
   backgroundColor,
   penColor,
-  buttonColor,
+  saveButtonColor,
+  clearButtonColor,
   clearText,
   saveText,
-  buttonTextColor,
   borderColor,
   action,
   _height,
-  _width
+  _width,
+  styles
 ) {
   const ref = useRef();
 
   const row = {
     display: "flex",
     flexDirection: "row",
-    width: "100%"
-  }
-  
+    width: "100%",
+    alignItems: "stretch",
+  };
+
   const button = {
     width: "50%",
-    height: "20%",
+    height: "100%",
     margin: 0,
     display: "block",
+    flex: 1,
     float: "left",
-    textAlign: "center"
-  }
+    alignItems: "stretch",
+    textAlign: "center",
+  };
 
-  const buttonText = {
-    backgroundColor: buttonColor,
-    borderTop: `2px solid ${borderColor}`,
-    color: buttonTextColor,
+  const saveButtonText = {
+    backgroundColor: saveButtonColor,
+    fontFamily: styles.saveText.fontFamily,
+    fontWeight: styles.saveText.fontWeight,
+    color: styles.saveText.color,
+    fontSize: 18,
+    numberOfLines: 1,
     width: "100%",
+    height: "100%",
     display: "block",
+    borderTop: `2px solid ${borderColor}`,
     margin: 0,
-    padding: 5
-  }
+    padding: 5,
+  };
+
+  const clearButtonText = {
+    backgroundColor: clearButtonColor,
+    fontFamily: styles.clearText.fontFamily,
+    fontWeight: styles.clearText.fontWeight,
+    color: styles.clearText.color,
+    fontSize: 18,
+    numberOfLines: 1,
+    width: "100%",
+    height: "100%",
+    display: "block",
+    borderTop: `2px solid ${borderColor}`,
+    margin: 0,
+    padding: 5,
+  };
 
   const handleConfirm = () => {
-      if(!ref.current.isEmpty()){
-        if(action){
-          action(ref.current.toDataURL())
-        }
-        ref.current.clear()
+    if (!ref.current.isEmpty()) {
+      if (action) {
+        action(ref.current.toDataURL());
       }
-  }
-  const handleClear = () => {
-    if(!ref.current.isEmpty()) {
-      ref.current.clear()
+      ref.current.clear();
     }
-  }
-  ref.penColor = penColor
-  ref.backgroundColor = backgroundColor
+  };
+  const handleClear = () => {
+    if (!ref.current.isEmpty()) {
+      ref.current.clear();
+    }
+  };
+  ref.penColor = penColor;
+  ref.backgroundColor = backgroundColor;
   return (
-    <View style={{backgroundColor: backgroundColor}}>
-      <SignaturePad
-        ref={ref}
-        options={{ penColor: penColor }}
-      />
+    <View style={{ backgroundColor: backgroundColor }}>
+      <SignaturePad ref={ref} options={{ penColor: penColor }} />
       <View style={row}>
         <TouchableOpacity style={button} onPress={handleClear}>
-          <Text style={buttonText}>{clearText}</Text>
+          <Text
+            style={[
+              clearButtonText,
+              { borderRight: `2px solid ${borderColor}` },
+            ]}
+          >
+            {clearText}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={button} onPress={handleConfirm}>
-          <Text style={[buttonText, {borderLeft: `2px solid ${borderColor}`}]}>{saveText}</Text>
+          <Text style={saveButtonText}>{saveText}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -76,7 +104,3 @@ function getSignature(
 }
 
 export default getSignature;
-
-//TODO
-//  - Make sure entire canvas is captured/displayed when it's large
-//  - Signatures from web will have black background in native webview (existing issue)
