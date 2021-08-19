@@ -1,22 +1,38 @@
 import React, { useRef } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableHighlight,
+} from "react-native";
 import SignaturePad from "react-signature-pad-wrapper";
 import { WebView } from "react-native-webview";
 
 function getSignature(
   backgroundColor,
-  penColor,
-  saveButtonColor,
-  clearButtonColor,
-  clearText,
-  saveText,
   borderColor,
+  penColor,
+  clearText,
+  clearButtonColor,
+  clearBorder,
+  clearBorderColor,
+  clearRounding,
+  saveText,
+  saveButtonColor,
+  saveBorder,
+  saveBorderColor,
+  saveRounding,
   action,
   _height,
   _width,
   styles
 ) {
   const ref = useRef();
+  const saveBorderWidth = saveBorder ? 2 : 0;
+  const clearBorderWidth = clearBorder ? 2 : 0;
+  const clearPadding = 8 - clearBorderWidth;
+  const savePadding = 8 - saveBorderWidth;
 
   const row = {
     display: "flex",
@@ -25,45 +41,46 @@ function getSignature(
     alignItems: "stretch",
   };
 
-  const button = {
+  const buttonContainer = {
     width: "50%",
-    height: "100%",
-    margin: 0,
-    display: "block",
-    flex: 1,
-    float: "left",
-    alignItems: "stretch",
+    paddingLeft: 8,
+    paddingRight: 8,
+  };
+
+  const saveButton = {
+    width: "100%",
+    height: 40,
     textAlign: "center",
+    marginTop: 24,
+    backgroundColor: saveButtonColor,
+    fontWeight: styles.saveText.fontWeight,
+    color: styles.saveText.color,
+    border: `${saveBorderWidth}px solid ${saveBorderColor}`,
+    borderRadius: saveRounding,
+    padding: savePadding,
+  };
+
+  const clearButton = {
+    width: "100%",
+    height: 40,
+    textAlign: "center",
+    marginTop: 24,
+    backgroundColor: clearButtonColor,
+    fontWeight: styles.clearText.fontWeight,
+    color: styles.clearText.color,
+    border: `${clearBorderWidth}px solid ${clearBorderColor}`,
+    borderRadius: clearRounding,
+    padding: clearPadding,
   };
 
   const saveButtonText = {
-    backgroundColor: saveButtonColor,
     fontFamily: styles.saveText.fontFamily,
-    fontWeight: styles.saveText.fontWeight,
-    color: styles.saveText.color,
     fontSize: 18,
-    numberOfLines: 1,
-    width: "100%",
-    height: "100%",
-    display: "block",
-    borderTop: `2px solid ${borderColor}`,
-    margin: 0,
-    padding: 5,
   };
 
   const clearButtonText = {
-    backgroundColor: clearButtonColor,
     fontFamily: styles.clearText.fontFamily,
-    fontWeight: styles.clearText.fontWeight,
-    color: styles.clearText.color,
     fontSize: 18,
-    numberOfLines: 1,
-    width: "100%",
-    height: "100%",
-    display: "block",
-    borderTop: `2px solid ${borderColor}`,
-    margin: 0,
-    padding: 5,
   };
 
   const handleConfirm = () => {
@@ -74,30 +91,61 @@ function getSignature(
       ref.current.clear();
     }
   };
+
   const handleClear = () => {
     if (!ref.current.isEmpty()) {
       ref.current.clear();
     }
   };
+
   ref.penColor = penColor;
   ref.backgroundColor = backgroundColor;
+
   return (
-    <View style={{ backgroundColor: backgroundColor }}>
-      <SignaturePad ref={ref} options={{ penColor: penColor }} />
+    <View>
+      <View
+        style={{
+          backgroundColor: backgroundColor,
+          border: `2px solid ${borderColor}`,
+        }}
+      >
+        <SignaturePad ref={ref} options={{ penColor: penColor }} />
+      </View>
       <View style={row}>
-        <TouchableOpacity style={button} onPress={handleClear}>
-          <Text
-            style={[
-              clearButtonText,
-              { borderRight: `2px solid ${borderColor}` },
-            ]}
+        <View style={buttonContainer}>
+          <TouchableHighlight
+            style={clearButton}
+            onPress={handleClear}
+            underlayColor="transparent"
+            activeOpacity={0.4}
           >
-            {clearText}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={button} onPress={handleConfirm}>
-          <Text style={saveButtonText}>{saveText}</Text>
-        </TouchableOpacity>
+            <Text
+              style={clearButtonText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              adjustsFontSizeToFit="true"
+            >
+              {clearText}
+            </Text>
+          </TouchableHighlight>
+        </View>
+        <View style={buttonContainer}>
+          <TouchableHighlight
+            style={saveButton}
+            onPress={handleConfirm}
+            underlayColor="transparent"
+          >
+            <Text
+              style={saveButtonText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              adjustsFontSizeToFit="true"
+              activeOpacity={0.4}
+            >
+              {saveText}
+            </Text>
+          </TouchableHighlight>
+        </View>
       </View>
     </View>
   );

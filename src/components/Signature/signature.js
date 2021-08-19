@@ -5,52 +5,72 @@ import { WebView } from "react-native-webview";
 
 function getSignature(
   backgroundColor,
-  penColor,
-  saveButtonColor,
-  clearButtonColor,
-  clearText,
-  saveText,
   borderColor,
+  penColor,
+  clearText,
+  clearButtonColor,
+  clearBorder,
+  clearBorderColor,
+  clearRounding,
+  saveText,
+  saveButtonColor,
+  saveBorder,
+  saveBorderColor,
+  saveRounding,
   action,
   _height,
   _width,
   styles
 ) {
   const sigRef = useRef();
+  const saveBorderWidth = saveBorder ? 2 : 0;
+  const clearBorderWidth = clearBorder ? 2 : 0;
+
   const row = {
     display: "flex",
     flexDirection: "row",
     width: "100%",
   };
+
   const saveButton = {
     width: "50%",
     height: _height * 0.2,
     margin: "auto",
+    paddingTop: 24,
+    paddingLeft: 8,
+    paddingRight: 8,
     float: "left",
     textAlign: "center",
-    color: styles.saveButton.color,
+    color: styles.saveText.color,
   };
+
   const clearButton = {
     width: "50%",
     height: _height * 0.2,
     margin: "auto",
+    paddingLeft: 8,
+    paddingRight: 8,
     float: "left",
     textAlign: "center",
-    color: styles.clearButton.color,
+    color: styles.clearText.color,
   };
+
   const saveButtonText = {
-    color: styles.saveButton.color,
+    fontFamily: styles.saveText.fontFamily,
+    fontWeight: styles.saveText.fontWeight,
+    color: styles.saveText.color,
     textAlign: "center",
-    borderWidth: 2,
     backgroundColor: saveButtonColor,
-    borderColor: borderColor,
+    border: `${saveBorderWidth}px solid ${saveBorderColor}`,
   };
+
   const clearButtonText = {
-    color: styles.clearButton.color,
+    fontFamily: styles.clearText.fontFamily,
+    fontWeight: styles.clearText.fontWeight,
+    color: styles.clearText.color,
     textAlign: "center",
-    borderWidth: 2,
     backgroundColor: clearButtonColor,
-    borderColor: borderColor,
+    border: `${clearBorderWidth}px solid ${clearBorderColor}`,
   };
 
   const handleEmpty = () => {
@@ -103,7 +123,7 @@ function getSignature(
 
       <View style={row}>
         <TouchableOpacity style={clearButton} onPress={handleClear}>
-          <Text style={[clearButtonText, { borderRightWidth: 0 }]}>
+          <Text style={clearButtonText}>
             {clearText}
           </Text>
         </TouchableOpacity>

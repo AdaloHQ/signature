@@ -3,45 +3,51 @@ import { Text, View, StyleSheet, Button, Pressable } from "react-native";
 import getSignature from "./signature";
 
 function Signature(props) {
-  const { setStyles, primaryColor, action, _height, _width, styles } = props;
-  let {
-    backgroundColor,
-    penColor,
-    saveButtonColor,
+  const { setStyles, buttons, _height, _width } = props;
+  const {
+    clearText,
     clearButtonColor,
-    borderColor,
-  } = props;
-  let buttonTextColor;
+    clearBorder,
+    clearBorderColor,
+    clearRounding,
+    saveText,
+    saveButtonColor,
+    saveBorder,
+    saveBorderColor,
+    saveRounding,
+    action,
+    styles,
+  } = buttons;
+  let { backgroundColor, penColor, borderColor } = props;
   if (setStyles === 0) {
     backgroundColor = "#FFFFFF";
-    penColor = "#666666";
-    saveButtonColor = primaryColor;
-    clearButtonColor = primaryColor;
     borderColor = "#E0E0E0";
+    penColor = "#666666";
   } else if (setStyles === 1) {
     backgroundColor = "#F5F5F5";
-    penColor = "#666666";
-    saveButtonColor = "#34C759";
-    clearButtonColor = "#9E9E9E";
     borderColor = "#9E9E9E";
+    penColor = "#666666";
   } else if (setStyles === 2) {
     backgroundColor = "#212121";
-    penColor = "#FFFFFF";
-    saveButtonColor = "#757575";
-    clearButtonColor = "#757575";
     borderColor = "#212121";
+    penColor = "#FFFFFF";
   }
-  console.log(styles.clearText);
   return (
-    <View style={(styles.wrapper, { border: `2px solid ${borderColor}` })}>
+    <View style={styles.wrapper}>
       {getSignature(
         backgroundColor,
-        penColor,
-        saveButtonColor,
-        clearButtonColor,
-        props.clearText,
-        props.saveText,
         borderColor,
+        penColor,
+        clearText,
+        clearButtonColor,
+        clearBorder,
+        clearBorderColor,
+        clearRounding,
+        saveText,
+        saveButtonColor,
+        saveBorder,
+        saveBorderColor,
+        saveRounding,
         action,
         _height,
         _width,
