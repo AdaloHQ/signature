@@ -29,7 +29,7 @@ function Signature(props) {
     penColor = "#666666";
   } else if (setStyles === 2) {
     backgroundColor = "#212121";
-    borderColor = "#212121";
+    borderColor = "#757575";
     penColor = "#FFFFFF";
   }
   return (

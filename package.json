@@ -1,7 +1,7 @@
 {
   "name": "signature-library",
   "description": "A signature pad",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "license": "ISC",
   "author": "Adalo",

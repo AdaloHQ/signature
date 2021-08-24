@@ -29,8 +29,8 @@ function getSignature(
   styles
 ) {
   const ref = useRef();
-  const saveBorderWidth = saveBorder ? 2 : 0;
-  const clearBorderWidth = clearBorder ? 2 : 0;
+  const saveBorderWidth = saveBorder ? 1 : 0;
+  const clearBorderWidth = clearBorder ? 1 : 0;
   const clearPadding = 8 - clearBorderWidth;
   const savePadding = 8 - saveBorderWidth;
 
@@ -41,17 +41,11 @@ function getSignature(
     alignItems: "stretch",
   };
 
-  const buttonContainer = {
-    width: "50%",
-    paddingLeft: 8,
-    paddingRight: 8,
-  };
-
   const saveButton = {
     width: "100%",
     height: 40,
     textAlign: "center",
-    marginTop: 24,
+    marginTop: 16,
     backgroundColor: saveButtonColor,
     fontWeight: styles.saveText.fontWeight,
     color: styles.saveText.color,
@@ -64,7 +58,7 @@ function getSignature(
     width: "100%",
     height: 40,
     textAlign: "center",
-    marginTop: 24,
+    marginTop: 16,
     backgroundColor: clearButtonColor,
     fontWeight: styles.clearText.fontWeight,
     color: styles.clearText.color,
@@ -98,26 +92,23 @@ function getSignature(
     }
   };
 
-  ref.penColor = penColor;
-  ref.backgroundColor = backgroundColor;
-
   return (
     <View>
       <View
         style={{
           backgroundColor: backgroundColor,
-          border: `2px solid ${borderColor}`,
+          border: `1px solid ${borderColor}`,
         }}
       >
         <SignaturePad ref={ref} options={{ penColor: penColor }} />
       </View>
       <View style={row}>
-        <View style={buttonContainer}>
+        <View style={{ width: "50%", paddingRight: "8px" }}>
           <TouchableHighlight
             style={clearButton}
             onPress={handleClear}
             underlayColor="transparent"
-            activeOpacity={0.4}
+            activeOpacity={0}
           >
             <Text
               style={clearButtonText}
@@ -129,18 +120,18 @@ function getSignature(
             </Text>
           </TouchableHighlight>
         </View>
-        <View style={buttonContainer}>
+        <View style={{ width: "50%", paddingLeft: "8px" }}>
           <TouchableHighlight
             style={saveButton}
             onPress={handleConfirm}
             underlayColor="transparent"
+            activeOpacity={0}
           >
             <Text
               style={saveButtonText}
               numberOfLines={1}
               ellipsizeMode="tail"
               adjustsFontSizeToFit="true"
-              activeOpacity={0.4}
             >
               {saveText}
             </Text>

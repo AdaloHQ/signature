@@ -1,13 +1,13 @@
 {
-  "displayName": "Signature",
+  "displayName": "Signature Pad",
   "defaultWidth": 343,
-  "defaultHeight": 238,
+  "defaultHeight": 229,
   "components": "./index.js",
   "icon": "./example-thumbnail.png",
   "props": [
     {
       "name": "setStyles",
-      "displayName": "Styles",
+      "displayName": "Style",
       "type": "number",
       "default": 0,
       "control": {
@@ -57,7 +57,7 @@
           "name": "clearText",
           "displayName": "Clear Button Text",
           "type": "text",
-          "default": "Clear",
+          "default": "CLEAR",
           "styles": {
             "fontFamily": "@body",
             "fontWeight": 600,
@@ -96,7 +96,7 @@
           "name": "saveText",
           "displayName": "Save Button Text",
           "type": "text",
-          "default": "Save",
+          "default": "SAVE",
           "styles": {
             "fontFamily": "@body",
             "fontWeight": 600,
