@@ -1,1 +1,3 @@
-export {    Signature as Signature,  } from '../../index.js'
+export {
+  Signature as Signature,
+} from '../../index.js'

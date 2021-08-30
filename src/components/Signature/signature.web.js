@@ -80,9 +80,9 @@ function getSignature(
   const handleConfirm = () => {
     if (!ref.current.isEmpty()) {
       if (action) {
-        action(ref.current.toDataURL());
+        const imageArgument = {data:ref.current.toDataURL(), filename:'my-signature'}
+        action(imageArgument);
       }
-      ref.current.clear();
     }
   };
 
@@ -114,7 +114,7 @@ function getSignature(
               style={clearButtonText}
               numberOfLines={1}
               ellipsizeMode="tail"
-              adjustsFontSizeToFit="true"
+              adjustsFontSizeToFit={true}
             >
               {clearText}
             </Text>
@@ -131,7 +131,7 @@ function getSignature(
               style={saveButtonText}
               numberOfLines={1}
               ellipsizeMode="tail"
-              adjustsFontSizeToFit="true"
+              adjustsFontSizeToFit={true}
             >
               {saveText}
             </Text>
