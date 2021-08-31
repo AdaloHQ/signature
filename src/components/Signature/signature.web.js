@@ -80,8 +80,9 @@ function getSignature(
   const handleConfirm = () => {
     if (!ref.current.isEmpty()) {
       if (action) {
-        const imageArgument = {data:ref.current.toDataURL(), filename:'my-signature'}
-        action(imageArgument);
+        // const imageArgument = {data:ref.current.toDataURL(), filename:'my-signature'}
+        // action(imageArgument);
+        action(ref.current.toDataURL())
       }
     }
   };

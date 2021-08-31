@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Button, Pressable } from "react-native";
 import getSignature from "./signature";
 
 function Signature(props) {
-  const { setStyles, buttons, _height, _width } = props;
+  const { setStyles, buttons, _height, _width, _setScrollEnabled } = props;
   const {
     clearText,
     clearButtonColor,
@@ -51,7 +51,8 @@ function Signature(props) {
         action,
         _height,
         _width,
-        styles
+        styles,
+        _setScrollEnabled,
       )}
     </View>
   );

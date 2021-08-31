@@ -27,7 +27,8 @@ function getSignature(
   action,
   _height,
   _width,
-  styles
+  styles,
+  _setScrollEnabled
 ) {
   const sigRef = useRef();
   const saveBorderWidth = saveBorder ? 1 : 0;
@@ -91,8 +92,7 @@ function getSignature(
 
   const handleSignature = (signature) => {
     if (action) {
-      const imageArgument = {data: signature, filename: 'my-signature'}
-      action(imageArgument);
+      action(signature);
     }
   };
 
@@ -103,6 +103,18 @@ function getSignature(
   const handleConfirm = () => {
     sigRef.current.readSignature();
   };
+
+  const onBegin = () => {
+    if(_setScrollEnabled){
+      _setScrollEnabled(false)
+    }
+  }
+
+  const onEnd = () => {
+    if(_setScrollEnabled){
+      _setScrollEnabled(true)
+    }
+  }
 
   return (
     <View>
@@ -116,6 +128,8 @@ function getSignature(
           ref={sigRef}
           onOK={handleSignature}
           onEmpty={handleEmpty}
+          onBegin={onBegin}
+          onEnd={onEnd}
           webStyle={`
 			      .m-signature-pad 
 			      {
@@ -123,6 +137,7 @@ function getSignature(
 				    
   				    height: ${_height - 56};
               border: 1px solid ${borderColor};
+              overflow: hidden;
 			      }
             .m-signature-pad--footer
             {
