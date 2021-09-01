@@ -137,7 +137,7 @@
           "type": "action",
           "arguments": [
             {
-              "type": "text",
+              "type": "image",
               "displayName": "Signature"
             }
           ]

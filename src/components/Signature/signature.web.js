@@ -1,38 +1,28 @@
-import React, { useRef } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native";
+import React, { useRef, useState } from "react";
+import { Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
 import SignaturePad from "react-signature-pad-wrapper";
 import { WebView } from "react-native-webview";
 
-function getSignature(
-  backgroundColor,
-  borderColor,
-  penColor,
-  clearText,
-  clearButtonColor,
-  clearBorder,
-  clearBorderColor,
-  clearRounding,
-  saveText,
-  saveButtonColor,
-  saveBorder,
-  saveBorderColor,
-  saveRounding,
-  action,
-  _height,
-  _width,
-  styles
-) {
+function SignatureCanvas(props) {
+  const {
+    backgroundColor,
+    borderColor,
+    penColor,
+    clearText,
+    clearButtonColor,
+    clearBorder,
+    clearBorderColor,
+    clearRounding,
+    saveText,
+    saveButtonColor,
+    saveBorder,
+    saveBorderColor,
+    saveRounding,
+    action,
+    styles,
+  } = props;
   const ref = useRef();
-  const saveBorderWidth = saveBorder ? 1 : 0;
-  const clearBorderWidth = clearBorder ? 1 : 0;
-  const clearPadding = 8 - clearBorderWidth;
-  const savePadding = 8 - saveBorderWidth;
+  const [loading, setLoading] = useState(false);
 
   const row = {
     display: "flex",
@@ -41,48 +31,53 @@ function getSignature(
     alignItems: "stretch",
   };
 
-  const saveButton = {
+  const buttons = {
     width: "100%",
     height: 40,
     textAlign: "center",
     marginTop: 16,
+    padding: 10,
+    borderStyle: "solid",
+  };
+
+  const saveButton = {
     backgroundColor: saveButtonColor,
     fontWeight: styles.saveText.fontWeight,
     color: styles.saveText.color,
-    border: `${saveBorderWidth}px solid ${saveBorderColor}`,
+    borderWidth: saveBorder ? 1 : 0,
+    borderColor: saveBorderColor,
     borderRadius: saveRounding,
-    padding: savePadding,
   };
 
   const clearButton = {
-    width: "100%",
-    height: 40,
-    textAlign: "center",
-    marginTop: 16,
     backgroundColor: clearButtonColor,
     fontWeight: styles.clearText.fontWeight,
     color: styles.clearText.color,
-    border: `${clearBorderWidth}px solid ${clearBorderColor}`,
+    borderWidth: clearBorder ? 1 : 0,
+    borderColor: clearBorderColor,
     borderRadius: clearRounding,
-    padding: clearPadding,
   };
 
   const saveButtonText = {
     fontFamily: styles.saveText.fontFamily,
-    fontSize: 18,
+    fontSize: 14,
   };
 
   const clearButtonText = {
     fontFamily: styles.clearText.fontFamily,
-    fontSize: 18,
+    fontSize: 14,
   };
 
   const handleConfirm = () => {
     if (!ref.current.isEmpty()) {
       if (action) {
-        // const imageArgument = {data:ref.current.toDataURL(), filename:'my-signature'}
-        // action(imageArgument);
-        action(ref.current.toDataURL())
+        setLoading(true);
+        const imageArgument = {
+          data: ref.current.toDataURL(),
+          filename: "signature.png",
+        };
+        action(imageArgument);
+        setLoading(false);
       }
     }
   };
@@ -105,11 +100,9 @@ function getSignature(
       </View>
       <View style={row}>
         <View style={{ width: "50%", paddingRight: "8px" }}>
-          <TouchableHighlight
-            style={clearButton}
+          <TouchableOpacity
+            style={[buttons, clearButton]}
             onPress={handleClear}
-            underlayColor="transparent"
-            activeOpacity={0}
           >
             <Text
               style={clearButtonText}
@@ -119,28 +112,31 @@ function getSignature(
             >
               {clearText}
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
         <View style={{ width: "50%", paddingLeft: "8px" }}>
-          <TouchableHighlight
-            style={saveButton}
+          <TouchableOpacity
+            style={[buttons, saveButton]}
             onPress={handleConfirm}
-            underlayColor="transparent"
-            activeOpacity={0}
+            disabled={loading}
           >
-            <Text
-              style={saveButtonText}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              adjustsFontSizeToFit={true}
-            >
-              {saveText}
-            </Text>
-          </TouchableHighlight>
+            {loading ? (
+              <ActivityIndicator size="small" color={styles.saveText.color} />
+            ) : (
+              <Text
+                style={saveButtonText}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                adjustsFontSizeToFit={true}
+              >
+                {saveText}
+              </Text>
+            )}
+          </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 }
 
-export default getSignature;
+export default SignatureCanvas;

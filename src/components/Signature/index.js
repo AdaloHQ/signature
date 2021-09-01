@@ -1,6 +1,6 @@
 import React, { Component, useRef } from "react";
-import { Text, View, StyleSheet, Button, Pressable } from "react-native";
-import getSignature from "./signature";
+import { Text, View, StyleSheet } from "react-native";
+import SignatureCanvas from "./signature";
 
 function Signature(props) {
   const { setStyles, buttons, _height, _width, _setScrollEnabled } = props;
@@ -33,37 +33,27 @@ function Signature(props) {
     penColor = "#FFFFFF";
   }
   return (
-    <View style={styles.wrapper}>
-      {getSignature(
-        backgroundColor,
-        borderColor,
-        penColor,
-        clearText,
-        clearButtonColor,
-        clearBorder,
-        clearBorderColor,
-        clearRounding,
-        saveText,
-        saveButtonColor,
-        saveBorder,
-        saveBorderColor,
-        saveRounding,
-        action,
-        _height,
-        _width,
-        styles,
-        _setScrollEnabled,
-      )}
-    </View>
+    <SignatureCanvas
+      backgroundColor={backgroundColor}
+      borderColor={borderColor}
+      penColor={penColor}
+      clearText={clearText}
+      clearButtonColor={clearButtonColor}
+      clearBorder={clearBorder}
+      clearBorderColor={clearBorderColor}
+      clearRounding={clearRounding}
+      saveText={saveText}
+      saveButtonColor={saveButtonColor}
+      saveBorder={saveBorder}
+      saveBorderColor={saveBorderColor}
+      saveRounding={saveRounding}
+      action={action}
+      _height={_height}
+      _width={_width}
+      styles={styles}
+      _setScrollEnabled={_setScrollEnabled}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default Signature;
