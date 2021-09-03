@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
-import { Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
-import SignatureScreen from "react-native-signature-canvas";
-import { WebView } from "react-native-webview";
+import React, { useRef, useState } from 'react'
+import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
+import SignatureScreen from 'react-native-signature-canvas'
+import { WebView } from 'react-native-webview'
 
 function SignatureCanvas(props) {
   const {
@@ -9,104 +9,63 @@ function SignatureCanvas(props) {
     borderColor,
     penColor,
     clearText,
-    clearButtonColor,
-    clearBorder,
-    clearBorderColor,
-    clearRounding,
     saveText,
-    saveButtonColor,
-    saveBorder,
-    saveBorderColor,
-    saveRounding,
     action,
+    styles,
+    containerStyles,
+    saveButton,
+    clearButton,
+    saveButtonText,
+    clearButtonText,
     _height,
     _width,
-    styles,
     _setScrollEnabled,
-  } = props;
-  const sigRef = useRef();
-  const [loading, setLoading] = useState(false);
+  } = props
+  const sigRef = useRef()
+  const [loading, setLoading] = useState(false)
 
-  const row = {
-    display: "flex",
-    flexDirection: "row",
-    width: _width,
-  };
-
-  const buttons = {
-    width: "100%",
-    height: 40,
-    marginTop: 16,
-    padding: 10,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    borderStyle: "solid",
-  };
-
-  const saveButton = {
-    backgroundColor: saveButtonColor,
-    borderWidth: saveBorder ? 1 : 0,
-    borderColor: saveBorderColor,
-    borderRadius: saveRounding,
-  };
-
-  const clearButton = {
-    backgroundColor: clearButtonColor,
-    borderWidth: clearBorder ? 1 : 0,
-    borderColor: clearBorderColor,
-    borderRadius: clearRounding,
-  };
-
-  const saveButtonText = {
-    fontFamily: styles.saveText.fontFamily,
-    color: styles.saveText.color,
-    fontWeight: styles.saveText.fontWeight,
-    fontSize: 14,
-  };
-
-  const clearButtonText = {
-    fontFamily: styles.clearText.fontFamily,
-    color: styles.clearText.color,
-    fontWeight: styles.clearText.fontWeight,
-    fontSize: 14,
-  };
+  const borderFix = {
+    width: '50%',
+    borderColor: borderColor,
+    borderTopWidth: 1,
+    borderStyle: 'solid',
+  }
 
   const handleEmpty = () => {
-    console.log("Empty signature");
-  };
+    console.log('Empty signature')
+  }
 
   const handleSignature = (signature) => {
     if (action) {
-      setLoading(true);
+      setLoading(true)
       const imageArgument = {
         data: ref.current.toDataURL(),
-        filename: "signature.png",
-      };
-      action(imageArgument);
-      setLoading(false);
+        filename: 'signature.png',
+      }
+      action(imageArgument)
+      setLoading(false)
     }
-  };
+  }
 
   const handleClear = () => {
-    sigRef.current.clearSignature();
-  };
+    sigRef.current.clearSignature()
+  }
 
   const handleConfirm = () => {
-    sigRef.current.readSignature();
-  };
+    sigRef.current.readSignature()
+  }
 
   const onBegin = () => {
     if (_setScrollEnabled) {
-      _setScrollEnabled(false);
+      _setScrollEnabled(false)
     }
-  };
+  }
 
   const onEnd = () => {
     if (_setScrollEnabled) {
-      _setScrollEnabled(true);
+      _setScrollEnabled(true)
     }
-  };
+  }
 
   return (
     <View>
@@ -138,23 +97,15 @@ function SignatureCanvas(props) {
             }
 		      `}
           autoClear={true}
-          imageType={"image/svg+xml"}
+          imageType={'image/svg+xml'}
           penColor={penColor}
           autoClear={false}
         />
       </View>
-      <View style={row}>
-        <View
-          style={{
-            width: "50%",
-            paddingRight: 8,
-            borderColor: borderColor,
-            borderTopWidth: 1,
-            borderStyle: "solid",
-          }}
-        >
+      <View style={containerStyles.row}>
+        <View style={[borderFix, { paddingRight: 8 }]}>
           <TouchableOpacity
-            style={[buttons, clearButton]}
+            style={[containerStyles.buttons, clearButton]}
             onPress={handleClear}
           >
             <Text
@@ -167,17 +118,9 @@ function SignatureCanvas(props) {
             </Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            width: "50%",
-            paddingLeft: 8,
-            borderColor: borderColor,
-            borderTopWidth: 1,
-            borderStyle: "solid",
-          }}
-        >
+        <View style={[borderFix, { paddingLeft: 8 }]}>
           <TouchableOpacity
-            style={[buttons, saveButton]}
+            style={[containerStyles.buttons, saveButton]}
             onPress={handleConfirm}
             disabled={loading}
           >
@@ -197,7 +140,7 @@ function SignatureCanvas(props) {
         </View>
       </View>
     </View>
-  );
+  )
 }
 
-export default SignatureCanvas;
+export default SignatureCanvas

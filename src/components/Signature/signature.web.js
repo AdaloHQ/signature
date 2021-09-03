@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
-import { Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
-import SignaturePad from "react-signature-pad-wrapper";
-import { WebView } from "react-native-webview";
+import React, { useRef, useState } from 'react'
+import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
+import SignaturePad from 'react-signature-pad-wrapper'
+import { WebView } from 'react-native-webview'
 
 function SignatureCanvas(props) {
   const {
@@ -9,84 +9,37 @@ function SignatureCanvas(props) {
     borderColor,
     penColor,
     clearText,
-    clearButtonColor,
-    clearBorder,
-    clearBorderColor,
-    clearRounding,
     saveText,
-    saveButtonColor,
-    saveBorder,
-    saveBorderColor,
-    saveRounding,
     action,
     styles,
-  } = props;
-  const ref = useRef();
-  const [loading, setLoading] = useState(false);
-
-  const row = {
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "stretch",
-  };
-
-  const buttons = {
-    width: "100%",
-    height: 40,
-    textAlign: "center",
-    marginTop: 16,
-    padding: 10,
-    borderStyle: "solid",
-  };
-
-  const saveButton = {
-    backgroundColor: saveButtonColor,
-    fontWeight: styles.saveText.fontWeight,
-    color: styles.saveText.color,
-    borderWidth: saveBorder ? 1 : 0,
-    borderColor: saveBorderColor,
-    borderRadius: saveRounding,
-  };
-
-  const clearButton = {
-    backgroundColor: clearButtonColor,
-    fontWeight: styles.clearText.fontWeight,
-    color: styles.clearText.color,
-    borderWidth: clearBorder ? 1 : 0,
-    borderColor: clearBorderColor,
-    borderRadius: clearRounding,
-  };
-
-  const saveButtonText = {
-    fontFamily: styles.saveText.fontFamily,
-    fontSize: 14,
-  };
-
-  const clearButtonText = {
-    fontFamily: styles.clearText.fontFamily,
-    fontSize: 14,
-  };
+    containerStyles,
+    saveButton,
+    clearButton,
+    saveButtonText,
+    clearButtonText,
+  } = props
+  const ref = useRef()
+  const [loading, setLoading] = useState(false)
 
   const handleConfirm = () => {
     if (!ref.current.isEmpty()) {
       if (action) {
-        setLoading(true);
+        setLoading(true)
         const imageArgument = {
           data: ref.current.toDataURL(),
-          filename: "signature.png",
-        };
-        action(imageArgument);
-        setLoading(false);
+          filename: 'signature.png',
+        }
+        action(imageArgument)
+        setLoading(false)
       }
     }
-  };
+  }
 
   const handleClear = () => {
     if (!ref.current.isEmpty()) {
-      ref.current.clear();
+      ref.current.clear()
     }
-  };
+  }
 
   return (
     <View>
@@ -98,10 +51,10 @@ function SignatureCanvas(props) {
       >
         <SignaturePad ref={ref} options={{ penColor: penColor }} />
       </View>
-      <View style={row}>
-        <View style={{ width: "50%", paddingRight: "8px" }}>
+      <View style={containerStyles.row}>
+        <View style={{ width: '50%', paddingRight: '8px' }}>
           <TouchableOpacity
-            style={[buttons, clearButton]}
+            style={[containerStyles.buttons, clearButton]}
             onPress={handleClear}
           >
             <Text
@@ -114,9 +67,9 @@ function SignatureCanvas(props) {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{ width: "50%", paddingLeft: "8px" }}>
+        <View style={{ width: '50%', paddingLeft: '8px' }}>
           <TouchableOpacity
-            style={[buttons, saveButton]}
+            style={[containerStyles.buttons, saveButton]}
             onPress={handleConfirm}
             disabled={loading}
           >
@@ -136,7 +89,7 @@ function SignatureCanvas(props) {
         </View>
       </View>
     </View>
-  );
+  )
 }
 
-export default SignatureCanvas;
+export default SignatureCanvas
