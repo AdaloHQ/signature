@@ -102,7 +102,7 @@ function SignatureCanvas(props) {
           autoClear={false}
         />
       </View>
-      <View style={containerStyles.row}>
+      <View style={[containerStyles.row, {width: _width}]}>
         <View style={[borderFix, { paddingRight: 8 }]}>
           <TouchableOpacity
             style={[containerStyles.buttons, clearButton]}
