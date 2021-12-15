@@ -80,12 +80,13 @@ function getSignature(
   const handleConfirm = () => {
     if (!ref.current.isEmpty()) {
       if (action) {
-        const imageArgument = {
-          data: ref.current.toDataURL(),
-          filename: 'my-signature',
-        }
-        console.log('image argument', imageArgument)
-        action(imageArgument)
+        //TODO: use this as the imageArgument when image type is implemented
+        // const imageArgument = {
+        //   data: ref.current.toDataURL(),
+        //   filename: 'my-signature',
+        // }
+        console.log('data url I think', ref.current.toDataURL())
+        action(ref.current.toDataURL())
       }
     }
   }
@@ -96,6 +97,7 @@ function getSignature(
     }
   }
 
+  console.log('return here')
   return (
     <View>
       <View

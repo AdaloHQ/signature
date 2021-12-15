@@ -92,62 +92,18 @@ function getSignature(
   }
 
   const handleSignature = async (signature) => {
-    console.log('signature data 92', signature)
-    console.log('action 92', action)
     try {
-      // const resizedImage = await ImageResizer.createResizedImage(
-      //   signature,
-      //   _width,
-      //   _height - 56,
-      //   'PNG',
-      //   100
-      // )
-
-      // const resizedImageRes = await RNFS.readFile(resizedImage.uri, 'base64')
-      // console.log('resizedImageRes', resizedImageRes)
-
-      const croppedImage = await RNPhotoManipulator.crop(
-        signature,
-        {
-          x: 100,
-          y: 0 + 56,
-          height: _height,
-          width: _width,
-        },
-        undefined,
-        'image/png'
-      )
-
-      console.log('cropped image', croppedImage)
-      const data = `data:image/png;base64,${await RNFS.readFile(
-        croppedImage,
-        'base64'
-      )}`
-      console.log('cropped image data', data)
-      console.log('height', _height, 'width', _width)
       if (action) {
-        const imageArgument = {
-          data: signature,
-          filename: 'my-signature',
-        }
-        action(imageArgument)
+        //TODO: use this as the imageArgument when image type is implemented
+        // const imageArgument = {
+        //   data: signature,
+        //   filename: 'my-signature',
+        // }
+        action(signature)
       }
     } catch (e) {
       console.error('Something went wrong', e)
     }
-    // ImageResizer.createResizedImage(signature, _width, _height - 56, 'PNG', 100)
-    //   .then((resizedImage) => {
-    //     console.log('resized url', resizedImage.url)
-    //     //TODO: use path
-    //     console.log('path', resizedImage.path)
-    //     if (action) {
-    //       const imageArgument = { data, filename: 'my-signature' }
-    //       action(imageArgument)
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.error('something went wrong', err)
-    //   })
   }
 
   const handleClear = () => {
@@ -155,12 +111,9 @@ function getSignature(
   }
 
   const handleConfirm = async () => {
-    console.log('handle confirm')
-    console.log('height', _height - 56, 'width', _width)
     await sigRef.current.readSignature()
   }
 
-  console.log('render height', _height, 'width', _width)
   return (
     <View>
       <View
@@ -192,7 +145,6 @@ function getSignature(
           autoClear={true}
           imageType={'image/png'}
           penColor={penColor}
-          autoClear={false}
         />
       </View>
       <View style={row}>
