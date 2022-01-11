@@ -3,7 +3,7 @@
   "defaultWidth": 343,
   "defaultHeight": 229,
   "components": "./index.js",
-  "icon": "./example-thumbnail.png",
+  "icon": "./signature-thumbnail.png",
   "props": [
     {
       "name": "setStyles",
@@ -13,10 +13,10 @@
       "control": {
         "type": "menu",
         "options": [
-          {"label": "Light", "value": 0},
-          {"label": "Gray", "value": 1},
-          {"label": "Dark", "value": 2},
-          {"label": "Custom", "value": 3}
+          { "label": "Light", "value": 0 },
+          { "label": "Gray", "value": 1 },
+          { "label": "Dark", "value": 2 },
+          { "label": "Custom", "value": 3 }
         ]
       }
     },
@@ -90,7 +90,7 @@
           "displayName": "Clear Button Rounding",
           "type": "number",
           "default": 4,
-          "control": {"type": "slider", "max": 20, "min": 0}
+          "control": { "type": "slider", "max": 20, "min": 0 }
         },
         {
           "name": "saveText",
@@ -129,7 +129,7 @@
           "displayName": "Save Button Rounding",
           "type": "number",
           "default": 4,
-          "control": {"type": "slider", "max": 20, "min": 0}
+          "control": { "type": "slider", "max": 20, "min": 0 }
         },
         {
           "name": "action",
