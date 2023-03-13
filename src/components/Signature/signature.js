@@ -2,15 +2,9 @@ import React, { useRef } from 'react'
 import {
   Text,
   View,
-  StyleSheet,
-  TouchableHighlight,
   TouchableOpacity,
 } from 'react-native'
 import SignatureScreen from 'react-native-signature-canvas'
-import RNPhotoManipulator from 'react-native-photo-manipulator'
-import ImageResizer from 'react-native-image-resizer'
-import RNFS from 'react-native-fs'
-import { WebView } from 'react-native-webview'
 
 function getSignature(
   backgroundColor,
