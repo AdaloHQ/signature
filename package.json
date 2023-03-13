@@ -1,7 +1,7 @@
 {
   "name": "signature-library",
   "description": "A canvas that users can draw on and use to sign documents.",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "main": "index.js",
   "license": "ISC",
   "author": "Adalo",
@@ -9,16 +9,6 @@
     "start": "adalo dev",
     "login": "adalo login",
     "publish": "adalo publish"
-  },
-  "adalo": {
-    "logo": "./signature-logo.png",
-    "displayName": "Signature",
-    "components": [
-      {
-        "name": "Signature",
-        "manifest": "./src/components/Signature/manifest.json"
-      }
-    ]
   },
   "devDependencies": {
     "@adalo/cli": "^0.0.42",

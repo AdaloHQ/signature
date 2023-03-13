@@ -1,0 +1,12 @@
+{
+  "author": "Adalo",
+  "description": "A canvas that users can draw on and use to sign documents.",
+  "logo": "./signature-logo.png",
+  "displayName": "Signature",
+  "components": [
+    {
+      "name": "Signature",
+      "manifest": "./src/components/Signature/manifest.json"
+    }
+  ]
+}
