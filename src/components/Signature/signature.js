@@ -35,7 +35,7 @@ function getSignature(
     display: 'flex',
     flexDirection: 'row',
     width: _width,
-    height: 40,
+    height: 60,
   }
 
   const saveButton = {
