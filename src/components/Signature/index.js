@@ -1,9 +1,18 @@
-import React, { Component, useRef } from 'react'
-import { Text, View, StyleSheet, Button, Pressable } from 'react-native'
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
 import getSignature from './signature'
 
 function Signature(props) {
   const { setStyles, buttons, _height, _width } = props
+
+  const wrapperStyles = StyleSheet.create({
+    container: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  })
+
   const {
     clearText,
     clearButtonColor,
@@ -18,7 +27,9 @@ function Signature(props) {
     action,
     styles,
   } = buttons
+
   let { backgroundColor, penColor, borderColor } = props
+
   if (setStyles === 0) {
     backgroundColor = '#FFFFFF'
     borderColor = '#E0E0E0'
@@ -32,8 +43,9 @@ function Signature(props) {
     borderColor = '#757575'
     penColor = '#FFFFFF'
   }
+
   return (
-    <View style={styles.wrapper}>
+    <View style={wrapperStyles.container}>
       {getSignature(
         backgroundColor,
         borderColor,
@@ -56,13 +68,5 @@ function Signature(props) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
 
 export default Signature

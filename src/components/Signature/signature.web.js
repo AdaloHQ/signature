@@ -2,12 +2,9 @@ import React, { useRef } from 'react'
 import {
   Text,
   View,
-  StyleSheet,
-  TouchableOpacity,
   TouchableHighlight,
 } from 'react-native'
 import SignaturePad from 'react-signature-pad-wrapper'
-import { WebView } from 'react-native-webview'
 
 function getSignature(
   backgroundColor,
@@ -85,7 +82,6 @@ function getSignature(
         //   data: ref.current.toDataURL(),
         //   filename: 'my-signature',
         // }
-        console.log('data url I think', ref.current.toDataURL())
         action(ref.current.toDataURL())
       }
     }
@@ -97,7 +93,6 @@ function getSignature(
     }
   }
 
-  console.log('return here')
   return (
     <View>
       <View
